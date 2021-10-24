@@ -3,83 +3,104 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Weather Forecast</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
 </nav>
 
-<br>
-<div class="form-row">
+<div class="form-row mt-2">
   <div class="col-3">
 
   </div>
 </div>
 
-<br>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <label>Escolha um estado:</label>
+      <label><b>Escolha um estado:</b></label>
       <ng-select [(ngModel)]="this.selectedState" (change)="StateSelectec()">
         <ng-option *ngFor="let state of this.statesList" [value]="state.name">{{state.name}}</ng-option>
       </ng-select>
     </div>
 
     <div class="col-md-4">
-      <label>Escolha uma cidade:</label>
-      <ng-select [(ngModel)]="this.selectedCity">
+      <label><b>Escolha uma cidade:</b></label>
+      <ng-select [(ngModel)]="this.selectedCity" (change)="GetWeatherForecast()">
         <ng-option *ngFor="let city of this.citiesList" [value]="city">{{city}}</ng-option>
       </ng-select>
     </div>
 
     <div class="col-md-4">
-      <label>Escolha um país:</label>
+      <label><b>Escolha um país:</b></label>
       <ng-select [(ngModel)]="this.selectedCountry" (change)="GetWeatherForecast()">
         <ng-option *ngFor="let country of this.countryList" [value]="country.name">{{country.name}}</ng-option>
       </ng-select>
     </div>
   </div>
   <div class="row">
-      <div class="col-md-4" *ngFor="let day of this.dataWeather.daily; let i = index">
-        <div class="weather">
-          <div class="city">
-            <h1>{{this.selectedCity}} - {{this.selectedState}}, {{this.selectedCountry}}</h1>
+    <div class="col-md-4" *ngFor="let day of this.dataWeather.daily; let i = index">
+      <div class="weather">
+        <div class="city">
+          <h1 *ngIf="this.selectedCity && this.selectedState && this.selectedCountry">{{this.selectedCity}} -
+            {{this.selectedState}}, {{this.selectedCountry}}</h1>
+          <h1 *ngIf="!(this.selectedCity && this.selectedState && this.selectedCountry)">-</h1>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="cont">
+          <div class="icon">
+            <div *ngIf="day.weather[0].id >= 200 && day.weather[0].id <= 232" class="thundery">
+              <div class="thundery__cloud"></div>
+              <div class="thundery__rain"></div>
+            </div>
+            <!-- <h2>Thundery</h2> -->
+
+            <div *ngIf="day.weather[0].id >= 500 && day.weather[0].id <= 531" class="rainy">
+              <div class="rainy__cloud"></div>
+              <div class="rainy__rain"></div>
+            </div>
+            <!-- <h2>Rainy</h2> -->
+
+            <div *ngIf="day.weather[0].id === 800" class="sunny"></div>
+            <!-- <h2>Sunny</h2> -->
+
+            <div *ngIf="day.weather[0].id === 801" class="partly_cloudy">
+              <div class="partly_cloudy__sun"></div>
+              <div class="partly_cloudy__cloud"></div>
+            </div>
+            <!-- <h2>Partly cloudy</h2> -->
+
+            <div *ngIf="day.weather[0].id >= 802 && day.weather[0].id <= 804" class="cloudy"></div>
+            <!-- <h2>Cloudy</h2> -->
+
+          </div>
+          <div class="temp">
+            <div class="current">
+              {{day.temp.day}}&deg;
+            </div>
+            <div class="high">
+              Máx: {{day.temp.max}}&deg;
+            </div>
+            <div class="low">
+              Min: {{day.temp.min}}&deg;
+            </div>
           </div>
           <div class="clearfix"></div>
-
-          <div class="cont">
-            <div class="icon">
-              <i class="fa fa-sun-o spin glow"></i>
-              <i class="fa fa-cloud wind"></i>
-              <i class="fa fa-cloud two"></i>
-            </div>
-            <div class="temp">
-              <div class="current">
-                {{day.temp.day}}&deg;
-              </div>
-              <div class="high">
-                Máx: {{day.temp.max}}&deg;
-              </div>
-              <div class="low">
-                Min: {{day.temp.min}}&deg;
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="date">
-              <p>{{ moment().add(i, 'day').format("DD/MM/YYYY") }}</p>
-            </div>
+          <div class="date">
+            <p>{{ moment().add(i, 'day').format("DD/MM/YYYY") }}</p>
           </div>
-        </div> <!-- weather -->
-      </div>
+        </div>
+      </div> <!-- weather -->
+    </div>
   </div>
 </div>
