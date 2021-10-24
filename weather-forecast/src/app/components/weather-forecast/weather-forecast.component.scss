@@ -285,7 +285,7 @@ h2 {
 			top: 20%;
 			right: 50%;
 			z-index: 1;
-			background-image: linear-gradient(transparent, #94cdd1);
+			background-image: linear-gradient(transparent, #6de9f5);
 			will-change: opacity, transform;
 			animation: fadeIn 1s ease-out infinite reverse,
 				scaleUp 1s ease-out infinite;
@@ -299,7 +299,7 @@ h2 {
 			right: 20%;
 			z-index: 1;
 			opacity: 0;
-			background-image: linear-gradient(transparent, #94cdd1);
+			background-image: linear-gradient(transparent, #6de9f5);
 			will-change: opacity, transform;
 			animation: fadeIn 2s ease-out .4s infinite reverse,
 				scaleUp 2s ease-out .4s infinite;
