@@ -1,1 +1,16 @@
-@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import url(http://fonts.googleapis.com/css?family=Raleway+Dots);
+
+
+body {background-color: #222222;}
+
+// ng-select colors
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: #747474;
+  color: #fff
+}
+
+*{
+  box-sizing: border-box;
+  font-family: 'Droid Sans', sans-serif;
+}
