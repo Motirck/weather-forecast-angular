@@ -1,7 +1,7 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://www.google.com/fonts#QuickUsePlace:quickUse/Family:Droid+Sans">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Weather Forecast</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -27,28 +27,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <label><b>Escolha um estado:</b></label>
-      <ng-select [(ngModel)]="this.selectedState" (change)="StateSelectec()">
+      <label class="white-color"><b>Escolha um país:</b></label>
+      <ng-select class="custom" [(ngModel)]="this.selectedCountry" (change)="CountrySelectec()">
+        <ng-option *ngFor="let country of this.countryList" [value]="country.name">{{country.name}}</ng-option>
+      </ng-select>
+    </div>
+    <div class="col-md-4">
+      <label class="white-color"><b>Escolha um estado:</b></label>
+      <ng-select [disabled]="!this.selectedCountry" [(ngModel)]="this.selectedState" (change)="StateSelected()">
         <ng-option *ngFor="let state of this.statesList" [value]="state.name">{{state.name}}</ng-option>
       </ng-select>
     </div>
 
     <div class="col-md-4">
-      <label><b>Escolha uma cidade:</b></label>
-      <ng-select [(ngModel)]="this.selectedCity" (change)="GetWeatherForecast()">
+      <label class="white-color"><b>Escolha uma cidade:</b></label>
+      <ng-select [disabled]="!this.selectedState" [(ngModel)]="this.selectedCity" (change)="GetWeatherForecast()">
         <ng-option *ngFor="let city of this.citiesList" [value]="city">{{city}}</ng-option>
       </ng-select>
     </div>
 
-    <div class="col-md-4">
-      <label><b>Escolha um país:</b></label>
-      <ng-select [(ngModel)]="this.selectedCountry" (change)="GetWeatherForecast()">
-        <ng-option *ngFor="let country of this.countryList" [value]="country.name">{{country.name}}</ng-option>
-      </ng-select>
-    </div>
   </div>
-  <div class="row">
-    <div class="col-md-4" *ngFor="let day of this.dataWeather.daily; let i = index">
+  <div class="row mt-3">
+    <div class="col-md-4 space-bottom" *ngFor="let day of this.dataWeather.daily; let i = index">
       <div class="weather">
         <div class="city">
           <h1 *ngIf="this.selectedCity && this.selectedState && this.selectedCountry">{{this.selectedCity}} -
@@ -102,5 +102,110 @@
         </div>
       </div> <!-- weather -->
     </div>
+
+    <div *ngIf="this.dataWeather.daily.length <= 0 && !this.showSpinner">
+      <div class="wrapper">
+        <div class="sun"></div>
+        <div class="cloud">
+          <div class="cloud1">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="cloud1 c_shadow">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cloud_s">
+          <div class="cloud1">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="cloud1 c_shadow">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cloud_vs">
+          <div class="cloud1">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="cloud1 c_shadow">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+        <div class="haze"></div>
+        <div class="haze_stripe"></div>
+        <div class="haze_stripe"></div>
+        <div class="haze_stripe"></div>
+        <div class="thunder"></div>
+        <div class="rain">
+           <ul>
+             <li></li>
+             <li></li>
+             <li></li>
+          </ul>
+        </div>
+        <div class="sleet">
+           <ul>
+             <li></li>
+             <li></li>
+             <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+<!-- Region - Spinner -->
+<div [hidden]="!this.showSpinner" class="spinner-container">
+  <div class="spinner-align">
+    <div class="spinner-custom">
+      <div class="loading">
+        <div class="l1">
+          <div></div>
+        </div>
+        <div class="l2">
+          <div></div>
+        </div>
+        <div class="l3">
+          <div></div>
+        </div>
+        <div class="l4">
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End-Region - Spinner -->
