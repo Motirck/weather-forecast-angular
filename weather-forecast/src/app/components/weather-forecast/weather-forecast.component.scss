@@ -372,17 +372,6 @@ h2 {
 
 // Spinner
 
-*{
-  box-sizing: border-box;
-}
-
-body, html{
-  background: rgb(30,30,30);
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
 .loading {
   width: 64px;
   height: 64px;
@@ -719,7 +708,7 @@ body, html{
   animation: haze_stripe 10s 0.4s linear infinite;
 }
 
-.thunder{
+.thunder-rain{
   position: absolute;
   bottom: 100px;
   left: 65px;
@@ -728,10 +717,10 @@ body, html{
   background: #f9db62;
   transform: skew(-25deg);
   opacity: 0;
-  animation: thunder 10s 0s linear infinite;
+  animation: thunder-rain 10s 0s linear infinite;
 }
 
-.thunder:before{
+.thunder-rain:before{
   content: '';
   position: absolute;
   top: 11px;
@@ -741,7 +730,7 @@ body, html{
   background: #f9db62;
 }
 
-.thunder:after{
+.thunder-rain:after{
   content: '';
   position: absolute;
   width: 0;
@@ -1038,7 +1027,7 @@ body, html{
   }
 }
 
-@keyframes thunder{
+@keyframes thunder-rain{
   0%{
     opacity: 0;
     bottom: 100px;
