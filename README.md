@@ -39,3 +39,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 > npm install --save @ng-select/ng-option-highlight
 
 > npm install moment
+
+> npm install ngx-toastr --save
+
+> npm install @angular/animations --save
