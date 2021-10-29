@@ -29,20 +29,20 @@
     <div class="col-md-4">
       <label class="white-color"><b>Escolha um país:</b></label>
       <ng-select class="custom" [(ngModel)]="this.selectedCountry" (change)="CountrySelectec()">
-        <ng-option *ngFor="let country of this.countryList" [value]="country.name">{{country.name}}</ng-option>
+        <ng-option *ngFor="let country of this.countryList" [value]="country.isoCode">{{country.name}} - {{country.isoCode}}</ng-option>
       </ng-select>
     </div>
     <div class="col-md-4">
       <label class="white-color"><b>Escolha um estado:</b></label>
       <ng-select [disabled]="!this.selectedCountry" [(ngModel)]="this.selectedState" (change)="StateSelected()">
-        <ng-option *ngFor="let state of this.statesList" [value]="state.name">{{state.name}}</ng-option>
+        <ng-option *ngFor="let state of this.statesList" [value]="state.isoCode">{{state.isoCode}} - {{state.name}}</ng-option>
       </ng-select>
     </div>
 
     <div class="col-md-4">
       <label class="white-color"><b>Escolha uma cidade:</b></label>
       <ng-select [disabled]="!this.selectedState" [(ngModel)]="this.selectedCity" (change)="GetWeatherForecast()">
-        <ng-option *ngFor="let city of this.citiesList" [value]="city">{{city}}</ng-option>
+        <ng-option *ngFor="let city of this.citiesList" [value]="city.name">{{city.name}}</ng-option>
       </ng-select>
     </div>
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherForecastService } from 'src/app/services/weather-forecast.service';
-import { STATE_CITIES } from 'src/app/utils/state-cities-br';
-import { STATES } from 'src/app/utils/states-br';
 import * as moment from 'moment'
 import { ToastrService } from 'ngx-toastr';
-
+import { Country, State, City }  from 'country-state-city';
+import { getStatesOfCountry } from 'country-state-city/dist/lib/state';
+import _default from 'country-state-city/dist/lib/city';
 @Component({
   selector: 'app-weather-forecast',
   templateUrl: './weather-forecast.component.html',
@@ -14,7 +14,7 @@ export class WeatherForecastComponent implements OnInit {
 
   public moment = moment
   public selectedCity: string = '';
-  public citiesList: Array<string> = [];
+  public citiesList: Array<any> = [];
   public selectedState: string = '';
   public statesList: Array<any> = [];
   public selectedCountry: string = '';
@@ -30,35 +30,29 @@ export class WeatherForecastComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.FillStates();
     this.FillCountries();
   }
 
-  FillStates() {
-    this.statesList = STATES;
+  FillCountries() {
+    this.countryList = Country.getAllCountries()
   }
 
-  FillCountries() {
-    this.countryList = [
-      { id: 1, name: "BR" },
-      // { id: 2, name: "US" },
-    ];
+  FillStates() {
+    this.statesList = getStatesOfCountry(this.selectedCountry);
   }
 
   StateSelected() {
     this.selectedCity = '';
     this.dataWeather = { daily: [] };
-    STATE_CITIES.forEach(item => {
-      if (item.initials === this.selectedState) {
-        this.citiesList = item.cities
-      }
-    });
+    console.log(this.selectedCountry, this.selectedState)
+    this.citiesList = _default.getCitiesOfState(this.selectedCountry, this.selectedState)
   }
 
   CountrySelectec() {
     this.selectedCity = '';
     this.selectedState = '';
     this.dataWeather = { daily: [] };
+    this.FillStates()
   }
 
   GetWeatherForecast() {
