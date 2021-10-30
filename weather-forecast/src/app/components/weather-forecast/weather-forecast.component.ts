@@ -31,6 +31,10 @@ export class WeatherForecastComponent implements OnInit {
 
   ngOnInit(): void {
     this.FillCountries();
+    this.selectedCity = 'Timoteo';
+    this.selectedState = 'MG';
+    this.selectedCountry = 'BR';
+    this.GetWeatherForecast();
   }
 
   FillCountries() {
@@ -70,7 +74,8 @@ export class WeatherForecastComponent implements OnInit {
       }
     }, (err) => {
       this.showSpinner = false;
-      this.toastr.warning('Não foram encontradas informações de tempo para a localidade informada.', `Atenção - Erro: ${err.status}`)
+      const status = err.status ? err.status : 500
+      this.toastr.warning('Não foram encontradas informações de tempo para a localidade informada.', `Atenção - Erro: ${status}`)
     })
   }
 
