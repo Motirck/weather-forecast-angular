@@ -2,7 +2,9 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway+Dots);
 @import '~ngx-toastr/toastr.css';
 
-body {background-color: #222222;}
+body {
+  background-color: #222222;
+}
 
 // ng-select colors
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {

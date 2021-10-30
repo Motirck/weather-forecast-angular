@@ -29,13 +29,15 @@
     <div class="col-md-4">
       <label class="white-color"><b>Escolha um país:</b></label>
       <ng-select class="custom" [(ngModel)]="this.selectedCountry" (change)="CountrySelectec()">
-        <ng-option *ngFor="let country of this.countryList" [value]="country.isoCode">{{country.name}} - {{country.isoCode}}</ng-option>
+        <ng-option *ngFor="let country of this.countryList" [value]="country.isoCode">{{country.isoCode}} -
+          {{country.name}}</ng-option>
       </ng-select>
     </div>
     <div class="col-md-4">
       <label class="white-color"><b>Escolha um estado:</b></label>
       <ng-select [disabled]="!this.selectedCountry" [(ngModel)]="this.selectedState" (change)="StateSelected()">
-        <ng-option *ngFor="let state of this.statesList" [value]="state.isoCode">{{state.isoCode}} - {{state.name}}</ng-option>
+        <ng-option *ngFor="let state of this.statesList" [value]="state.isoCode">{{state.isoCode}} - {{state.name}}
+        </ng-option>
       </ng-select>
     </div>
 
@@ -59,29 +61,12 @@
 
         <div class="cont">
           <div class="icon">
-            <div *ngIf="day.weather[0].id >= 200 && day.weather[0].id <= 232" class="thundery">
-              <div class="thundery__cloud"></div>
-              <div class="thundery__rain"></div>
-            </div>
-            <!-- <h2>Thundery</h2> -->
 
-            <div *ngIf="day.weather[0].id >= 500 && day.weather[0].id <= 531" class="rainy">
-              <div class="rainy__cloud"></div>
-              <div class="rainy__rain"></div>
-            </div>
-            <!-- <h2>Rainy</h2> -->
-
+            <div *ngIf="day.weather[0].id >= 200 && day.weather[0].id <= 232" class="stormy"></div>
+            <div *ngIf="day.weather[0].id >= 300 && day.weather[0].id <= 531" class="rainy"></div>
+            <div *ngIf="day.weather[0].id >= 600 && day.weather[0].id <= 622" class="snowy"></div>
+            <div *ngIf="day.weather[0].id !== 800 && (day.weather[0].id > 700 && day.weather[0].id <= 804)" class="cloudy"></div>
             <div *ngIf="day.weather[0].id === 800" class="sunny"></div>
-            <!-- <h2>Sunny</h2> -->
-
-            <div *ngIf="day.weather[0].id === 801" class="partly_cloudy">
-              <div class="partly_cloudy__sun"></div>
-              <div class="partly_cloudy__cloud"></div>
-            </div>
-            <!-- <h2>Partly cloudy</h2> -->
-
-            <div *ngIf="day.weather[0].id >= 802 && day.weather[0].id <= 804" class="cloudy"></div>
-            <!-- <h2>Cloudy</h2> -->
 
           </div>
           <div class="temp">
@@ -168,17 +153,17 @@
         <div class="haze_stripe"></div>
         <div class="thunder"></div>
         <div class="rain">
-           <ul>
-             <li></li>
-             <li></li>
-             <li></li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
           </ul>
         </div>
         <div class="sleet">
-           <ul>
-             <li></li>
-             <li></li>
-             <li></li>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
           </ul>
         </div>
       </div>
